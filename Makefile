@@ -1,6 +1,6 @@
 FLAGS =
 TESTENVVAR =
-REGISTRY ?= us-west1-docker.pkg.dev/orchestration-build/kube-state-metrics
+REGISTRY ?= gcr.io/orchestration-build/kube-state-metrics
 TAG_PREFIX = v
 VERSION = $(shell cat VERSION)
 TAG ?= $(TAG_PREFIX)$(VERSION)
