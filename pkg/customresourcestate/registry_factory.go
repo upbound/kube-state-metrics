@@ -172,7 +172,9 @@ func newCompiledMetric(m Metric) (compiledMetric, error) {
 			return nil, errors.New("expected each.info to not be nil")
 		}
 		cc, err := compileCommon(m.Info.MetricMeta)
-		cc.t = metric.Info
+		// NOTE(branden): Vector's prometheus_scrape source doesn't support the info metric type, so we emit info
+		// metrics as gauges.
+		cc.t = metric.Gauge
 		if err != nil {
 			return nil, fmt.Errorf("each.info: %w", err)
 		}
