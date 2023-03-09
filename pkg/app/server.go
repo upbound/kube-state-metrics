@@ -339,6 +339,11 @@ func createKubeClient(apiserver string, kubeconfig string, factories ...customre
 	config.AcceptContentTypes = "application/vnd.kubernetes.protobuf,application/json"
 	config.ContentType = "application/vnd.kubernetes.protobuf"
 
+	// NOTE(branden): these values match the burst and QPS values in kubectl.
+	// xref: https://github.com/kubernetes/kubernetes/pull/105520
+	config.Burst = 300
+	config.QPS = 50
+
 	kubeClient, err := clientset.NewForConfig(config)
 	if err != nil {
 		return nil, nil, nil, err
